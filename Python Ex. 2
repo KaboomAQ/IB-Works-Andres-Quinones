@@ -1,0 +1,2 @@
+print("Write an integer")
+int(input())
