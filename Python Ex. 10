@@ -1,0 +1,5 @@
+print("Write an integer")
+x=int(input())
+print("Write another integer")
+y=int(input())
+print(x/y)
