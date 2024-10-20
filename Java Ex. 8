@@ -1,0 +1,13 @@
+import java.util.Scanner;
+
+public class exEight{
+  public static void main (String args[]){
+    Scanner teclado = new Scanner (System.in);
+    System.out.println("Write an integer");
+    int x = teclado.nextInt();
+    System.out.println("Write another integer");
+    int y = teclado.nextInt();
+    int a = x - y;
+    System.out.println(a);
+}
+}
