@@ -1,0 +1,14 @@
+import java.util.Scanner;
+
+public class exSix{
+  public static void main (String args[]){
+    boolean numbers = false;
+    Scanner teclado = new Scanner (System.in);
+    System.out.println("Write an integer");
+    int x = teclado.nextInt();
+    System.out.println("Write another integer");
+    int y = teclado.nextInt();
+    System.out.println(x + ">" + y + " is " + (x > y));
+    System.out.println(x + "<" + y + " is " + (x < y));
+}
+}
