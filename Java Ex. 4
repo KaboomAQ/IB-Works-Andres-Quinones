@@ -4,6 +4,6 @@ public class exFour{
   public static void main (String args[]){
     Scanner teclado = new Scanner (System.in);
     System.out.println("Write a character");
-    String x = teclado.nextLine();
+    char x = teclado.nextChar();
 }
 }
