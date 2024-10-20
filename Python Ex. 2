@@ -1,2 +1,3 @@
 print("Write an integer")
-int(input())
+x=int(input())
+print(x)
