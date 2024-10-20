@@ -1,2 +1,3 @@
 print("Write a character")
-input()
+x=input()
+print(x)
