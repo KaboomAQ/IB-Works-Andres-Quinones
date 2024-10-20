@@ -1,7 +1,7 @@
 print("Write an integer")
-x=input()
+x=int(input())
 print("Write another integer")
-y=input()
+y=int(input())
 bool = False
 print(x," > ",y," is ", x>y)
 print(x," < ",y," is ", x<y)
