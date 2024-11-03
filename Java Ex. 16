@@ -1,0 +1,41 @@
+import java.util.Scanner;
+
+public class exercisesEleventoTwenty
+{
+    public static void main(String[] args){
+        Scanner teclado = new Scanner(System.in);
+        System.out.println("Write an integer:");
+        int x = teclado.nextInt();
+        System.out.println("Write another integer:");
+        int y = teclado.nextInt();
+        boolean yes = x > y;
+        boolean no = x < y;
+        if (yes == true && no == false){
+            System.out.println(x + " > " + y);
+        }
+        else if (no == true && yes == false){
+            System.out.println(x + " < " + y);
+        }
+        else if (x == y){
+            System.out.println(x + " = " + y);
+        }
+        if (x < 0){
+            System.out.println(x + " is negative");
+        }
+        if (x == 0){
+            System.out.println(x + " is zero");
+        }
+        if (x > 0){
+            System.out.println(x + " is positive");
+        }
+        if (y < 0){
+            System.out.println(y + " is negative");
+        }
+        if (y == 0){
+            System.out.println(y + " is zero");
+        }
+        if (y > 0){
+            System.out.println(y + " is positive");
+        }
+    }
+}
