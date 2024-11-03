@@ -1,0 +1,8 @@
+print("Write a year in numbers:")
+x=int(input())
+if x % 4 == 0 and x % 100 != 0:
+  print("leap year")
+elif x % 400 == 0:
+  print("leap year")
+elif x % 4 != 0:
+  print("natural year")
