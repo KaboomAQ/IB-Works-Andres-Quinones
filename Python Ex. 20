@@ -1,0 +1,18 @@
+print("Give the number of units of energy consumed BMI (as an integer value):")
+x=int(input())
+if (x <= 100):
+  a = 10
+  print("Phone bill = $",a)
+if (x >= 101 and x <= 200):
+  a = 10+(x-100)*0.5
+  print("Phone bill = $",a)
+if (x >= 201 and x <= 300):
+  if (x<=250):
+    a = 10+(100)*0.5+(x-200)*0.75
+    print("Phone bill = $",a)
+  elif (x>250):
+    a = 10+(100)*0.5+(x-200)*0.75+5
+    print("Phone bill = $",a)
+if (x >= 301):
+  a = 10+(100)*0.5+(100)*0.75+(x-300)*1+5
+  print("Energy bill = ",a)
