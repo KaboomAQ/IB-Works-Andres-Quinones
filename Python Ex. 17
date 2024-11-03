@@ -1,0 +1,8 @@
+print("Write a money value:")
+x=float(input())
+if x > 100000:
+  print("Tax value is", x*0.3)
+if x <= 100000 and x >= 50000:
+  print("Tax value is", x*0.2)
+if x < 50000:
+  print("Tax value is", x*0.1)
