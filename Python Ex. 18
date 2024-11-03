@@ -1,0 +1,10 @@
+print("Give your BMI (only one decimal value):")
+x=float(input())
+if (x < 18.5):
+  print("Underweight")
+if (x >= 18.5 and x < 24.9):
+  print("Normal weight")
+if (x >= 25 and x < 29.9):
+  print("Overweight")
+if (x >= 30):
+  print("Obese")
