@@ -1,0 +1,46 @@
+import java.util.Scanner;
+
+public class exercisesEleventoTwenty
+{
+    public static void main(String[] args){
+        Scanner teclado = new Scanner(System.in);
+        System.out.println("Give time in minutes of phone usage:");
+        int x = teclado.nextInt();
+        if (x <= 100){
+            int a = 10;
+            System.out.println("Phone bill = $" + a);
+        }
+        if (x >= 101 && x <= 200){
+            int b = 10;
+            Double c = (x-100)*0.5;
+            Double d = b+c;
+            System.out.println("Energy bill = "+ d);
+        }
+        if (x >= 201 && x <= 300){
+            if(x <= 250){
+                int b = 10;
+                Double c = (100)*0.5;
+                Double e = (x-200)*0.75;
+                Double d = b+c+e;
+                System.out.println("Energy bill = "+ d);
+            }
+            else if(x > 250){
+                int b = 10;
+                Double c = (100)*0.5;
+                Double e = (x-200)*0.75;
+                Double f = 5.0;
+                Double d = b+c+e+f;
+                System.out.println("Energy bill = "+ d);
+            }
+        }
+        if (x >= 301){
+            int b = 10;
+            Double c = (100)*0.5;
+            Double e = (200)*0.75;
+            Double f = (x-300)*1.0;
+            Double g = 5.0;
+            Double d = b+c+e+g;
+            System.out.println("Energy bill = "+ d);
+        }
+    }
+}
