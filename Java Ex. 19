@@ -1,0 +1,32 @@
+import java.util.Scanner;
+
+public class exercisesEleventoTwenty
+{
+    public static void main(String[] args){
+        Scanner teclado = new Scanner(System.in);
+        System.out.println("Give the number of units of energy consumed BMI (as an integer value):");
+        int x = teclado.nextInt();
+        if (x <= 100){
+            int a = x*1;
+            System.out.println("Energy bill = "+ a);
+        }
+        if (x >= 101 && x <= 200){
+            int b = 100*1;
+            Double c = (x-100)*1.5;
+            Double d = b+c;
+            System.out.println("Energy bill = "+ d);
+        }
+        if (x >= 201 && x <= 300){
+            int e = 100*1;
+            Double f = (x-100)*2.0;
+            Double g = e+f;
+            System.out.println("Energy bill = "+ g);
+        }
+        if (x >= 301){
+            int h = 100*1;
+            Double i = (x-100)*3.0;
+            Double j = h+i;
+            System.out.println("Energy bill = "+ j);
+        }
+    }
+}
