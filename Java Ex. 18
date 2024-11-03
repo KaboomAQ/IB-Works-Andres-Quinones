@@ -1,0 +1,22 @@
+import java.util.Scanner;
+
+public class exercisesEleventoTwenty
+{
+    public static void main(String[] args){
+        Scanner teclado = new Scanner(System.in);
+        System.out.println("Give your BMI (only one decimal value):");
+        Double x = teclado.nextDouble();
+        if (x < 18.5){
+            System.out.println("Underweight");
+        }
+        if (x >= 18.5 && x < 24.9){
+            System.out.println("Normal weight");
+        }
+        if (x >= 25 && x < 29.9){
+            System.out.println("Overweight");
+        }
+        if (x >= 30){
+            System.out.println("Obese");
+        }
+    }
+}
