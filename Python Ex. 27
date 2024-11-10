@@ -1,0 +1,6 @@
+print("Write a word")
+a = input()
+
+for x in range(0,len(a)):
+  b = a[x]
+  print(b)
