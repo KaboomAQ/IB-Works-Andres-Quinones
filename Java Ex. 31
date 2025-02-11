@@ -1,0 +1,29 @@
+public class Videojuegos
+{
+    private String game;
+    private String console;
+    private int times;
+    public Videojuegos(String game, String console, int times){
+        this.game = game;
+        this.console = console;
+        this.times = times;
+    }
+    public String toString(){
+        return "The game is called " + game + ", its console is " + console + " and it has been played " + times + " times.";
+    }
+}
+import java.util.Scanner;
+public class videojuegos2
+{
+    public static void main(String args[]){
+        Scanner teclado = new Scanner(System.in);
+        System.out.println("What is the name of your game?");
+        String gamee = teclado.nextLine();
+        System.out.println("For what console is it?");
+        String consola = teclado.nextLine();
+        System.out.println("How many times was it played?");
+        int times = teclado.nextInt();
+        Videojuegos hola = new Videojuegos(gamee,consola,times);
+        System.out.println(hola);
+    }
+}
