@@ -1,0 +1,88 @@
+import numpy as np
+import cv2
+import matplotlib.pyplot as plt
+from scipy.optimize import curve_fit
+from scipy.stats import pearsonr
+from google.colab import files
+
+# Subir la imagen desde el PC
+uploaded = files.upload()
+image_path = list(uploaded.keys())[0]  # Tomar el nombre del archivo subido
+
+# Cargar la imagen en escala de grises
+image = cv2.imread(image_path, cv2.IMREAD_GRAYSCALE)
+if image is None:
+    raise FileNotFoundError(f"No se pudo abrir la imagen: {image_path}")
+
+# Obtener dimensiones de la imagen
+h, w = image.shape
+
+# Aplicar el detector de bordes de Canny
+edges = cv2.Canny(image, 50, 150)
+
+# Encontrar contornos en la imagen
+contours, _ = cv2.findContours(edges, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+if not contours:
+    raise ValueError("No se detectaron contornos en la imagen. Intenta ajustar los parámetros del detector de bordes.")
+
+# Tomar el contorno más grande (suponemos que es la curva principal)
+contour = max(contours, key=cv2.contourArea)
+
+# Extraer puntos clave basados en curvatura y estructura
+corners = cv2.goodFeaturesToTrack(edges, maxCorners=100, qualityLevel=0.01, minDistance=5)
+if corners is None or len(corners) < 5:
+    raise ValueError("No se detectaron suficientes puntos clave. Prueba con otra imagen o ajusta los parámetros.")
+
+corners = np.round(corners).astype(int).reshape(-1, 2)
+
+# Calcular el centro aproximado de la espiral
+xc, yc = np.mean(corners[:, 0]), np.mean(corners[:, 1])
+
+# Convertir a coordenadas polares respecto al centro
+th = np.arctan2(corners[:, 1] - yc, corners[:, 0] - xc)
+r = np.sqrt((corners[:, 0] - xc)**2 + (corners[:, 1] - yc)**2)
+
+# Ordenar los puntos por ángulo
+sorted_indices = np.argsort(th)
+th, r = th[sorted_indices], r[sorted_indices]
+
+# Definir la función de la espiral áurea
+def golden_spiral(theta, A, B):
+    return A * np.exp(B * theta)
+
+# Ajustar la curva a la espiral áurea con control de errores
+try:
+    params, _ = curve_fit(golden_spiral, th, r, maxfev=10000)
+    A_fit, B_fit = params
+except RuntimeError:
+    raise RuntimeError("No se pudo ajustar la espiral. Intenta mejorar la calidad de la imagen o ajustar los parámetros.")
+
+# Generar la espiral ajustada
+theta_fit = np.linspace(min(th), max(th), 300)
+r_fit = golden_spiral(theta_fit, A_fit, B_fit)
+x_fit = xc + r_fit * np.cos(theta_fit)
+y_fit = yc + r_fit * np.sin(theta_fit)
+
+# Calcular escala visual basada en el tamaño de la imagen
+escala_visualizacion = (max(h, w) / 20) * 3  # Factor automático basado en la imagen
+
+# Generar la espiral áurea ideal para comparación
+golden_A, golden_B = 1.0, 0.306349
+golden_r_fit = golden_spiral(theta_fit, golden_A, golden_B) * escala_visualizacion
+x_golden = xc + golden_r_fit * np.cos(theta_fit)
+y_golden = yc + golden_r_fit * np.sin(theta_fit)
+
+# Calcular la correlación entre la espiral detectada y la espiral áurea
+corr_x, _ = pearsonr(x_fit, x_golden)
+corr_y, _ = pearsonr(y_fit, y_golden)
+corr_total = (corr_x + corr_y) / 2  # Promedio de correlación en X e Y
+
+# Graficar la imagen, los puntos clave detectados y la espiral áurea
+plt.figure(figsize=(8, 8))
+plt.imshow(image, cmap='gray')
+plt.scatter(corners[:, 0], corners[:, 1], color='red', label='Puntos Clave Relacionados')
+plt.plot(x_fit, y_fit, 'b-', label=f'Espiral Detectada (A={A_fit:.2f}, B={B_fit:.2f})')
+plt.plot(x_golden, y_golden, 'g--', label=f'Espiral Áurea Ideal (Escala Visual x{escala_visualizacion:.2f})')
+plt.legend()
+plt.title(f"Detección y Regresión de Espiral Áurea (Correlación: {corr_total * 100:.2f}%)")
+plt.show()
